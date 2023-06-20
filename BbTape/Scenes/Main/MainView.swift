@@ -11,7 +11,7 @@ import AVKit
 
 struct MainView: View {
     
-    @State var avPlayer: AVPlayer = AVPlayer(url: Bundle.main.url(forResource: "bbtape23", withExtension: "mp4")!)
+   var avPlayer: AVPlayer = AVPlayer(url: Bundle.main.url(forResource: "bbtape23", withExtension: "mp4")!)
     
     
     var body: some View {
