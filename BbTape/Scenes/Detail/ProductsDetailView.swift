@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ProductsDetailView: View {
     
-    var unit: Unit
+    var product: Product
     
     var body: some View {
         VStack {
-            Image(unit.image)
+            Image(product.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: .largeScreenWidth, height: .largeScreenWidth)
@@ -36,9 +36,9 @@ struct ProductsDetailView: View {
     private var productDetail: some View {
         VStack {
             DetailTitle(title: "Maker", explanation: "BB TAPE")
-            DetailTitle(title: "Title", explanation: unit.title)
-            DetailTitle(title: "Size ", explanation: unit.size)
-            DetailTitle(title: "Type ", explanation: unit.type)
+            DetailTitle(title: "Title", explanation: product.title)
+            DetailTitle(title: "Size ", explanation: product.size)
+            DetailTitle(title: "Type ", explanation: product.type)
         }
         .padding(.horizontal, 32)
     }
@@ -47,6 +47,6 @@ struct ProductsDetailView: View {
 
 struct ProductsDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsDetailView(unit: Unit(title: "", image: "", type: "", size: ""))
+        ProductsDetailView(product: Product(title: "", image: "", type: "", size: "", price: 3))
     }
 }

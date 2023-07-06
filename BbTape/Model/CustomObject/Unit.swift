@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct Unit: Identifiable {
+struct Product: Identifiable {
     var id: UUID = UUID()
     var title: String
     var image: String
     var type: String
     var size: String
+    var price: Int
 }

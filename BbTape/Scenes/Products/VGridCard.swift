@@ -9,18 +9,18 @@ import SwiftUI
 
 struct VGridCard: View {
     
-    var unit: Unit
+    var product: Product
     
     var body: some View {
         
         VStack {
-            Image(unit.image)
+            Image(product.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: .smallScreenWidth, height: .smallScreenWidth)
             
             
-            Text(unit.title)
+            Text(product.title)
                 .font(.bbFont(type: .smallBold))
         }
         .background(
@@ -31,6 +31,6 @@ struct VGridCard: View {
 
 struct VGridCard_Previews: PreviewProvider {
     static var previews: some View {
-        VGridCard(unit: Unit(title: "", image: "", type: "", size: ""))
+        VGridCard(product: Product(title: "", image: "", type: "", size: "", price: 3))
     }
 }
