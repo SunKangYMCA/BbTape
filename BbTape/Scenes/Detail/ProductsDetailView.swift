@@ -47,6 +47,7 @@ struct ProductsDetailView: View {
 
 struct ProductsDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsDetailView(product: Product(title: "", image: "", type: "", size: "", price: 3))
+        ProductsDetailView(product: productList[3])
+            .environmentObject(CartManager())
     }
 }

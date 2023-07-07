@@ -23,7 +23,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("Products", systemImage: "books.vertical.circle")
             }
-            .badge(3)
+            .badge(6)
             
             NavigationView {
                 FAQView()

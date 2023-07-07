@@ -10,38 +10,41 @@ import SwiftUI
 struct ProductsView: View {
     
     @StateObject var viewModel: ProductsViewModel = ProductsViewModel()
+    @StateObject var cartManager: CartManager = CartManager()
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(.black)
-            
-            VStack {
-                VGridView
+        
+        VStack {
+            VGridView
+        }
+        .navigationTitle("Products Shop")
+        .toolbar {
+            NavigationLink {
+                CartView()
+                    .environmentObject(cartManager)
+            } label: {
+                CartButton(numberOfProducts: cartManager.products.count)
             }
-            .navigationTitle("Products")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
+    
     private var VGridView: some View {
         ScrollView {
-            VStack {
-                Spacer()
-                
-                LazyVGrid(columns: viewModel.columns) {
-                    ForEach(viewModel.units) { unit in
-                        Button {
-                            viewModel.shouldShowProductsDetailView.toggle()
-                        } label: {
-                            VGridCard(unit: unit)
-                        }
-                        .sheet(isPresented: $viewModel.shouldShowProductsDetailView) {
-                            ProductsDetailView(unit: unit)
-                        }
+            LazyVGrid(columns: viewModel.columns) {
+                ForEach(productList, id: \.id) { product in
+                    Button {
+                        viewModel.shouldShowProductsDetailView.toggle()
+                    } label: {
+                        ProductCard(product: product)
+                            .environmentObject(cartManager)
+                    }
+                    .sheet(isPresented: $viewModel.shouldShowProductsDetailView) {
+                        ProductsDetailView(product: product)
                     }
                 }
             }
+            .padding()
         }
     }
 }
