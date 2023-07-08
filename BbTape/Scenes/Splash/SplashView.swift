@@ -12,31 +12,34 @@ struct SplashView: View {
     @StateObject var viewModel: SplashViewModel = SplashViewModel()
     
     var body: some View {
-        ZStack {
-            if viewModel.shouldShowMainTabView {
-                MainTabView()
-            } else {
-                Rectangle()
-                    .ignoresSafeArea()
-                VStack {
-                    Text("***BB***\nTAPE")
-                        .font(.bbFont(type: .hugeBold))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                    
-                    Image("SplashTape")
-                        .resizable()
-                        .rotationEffect(.degrees(+10))
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300, height: 300)
-                        .foregroundColor(.white)
+        
+        Group {
+            ZStack {
+                if viewModel.shouldShowMainTabView {
+                    MainTabView()
+                } else {
+                    Rectangle()
+                        .ignoresSafeArea()
+                    VStack {
+                        Text("***BB***\nTAPE")
+                            .font(.bbFont(type: .hugeBold))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
                         
+                        Image("SplashTape")
+                            .resizable()
+                            .rotationEffect(.degrees(+10))
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 300, height: 300)
+                            .foregroundColor(.white)
+                            
+                    }
+                    .padding()
                 }
-                .padding()
             }
+            .onAppear {
+                viewModel.showMainTabView()
         }
-        .onAppear {
-            viewModel.showMainTabView()
         }
     }
 }
