@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SplashView: View {
-    
     @StateObject var viewModel: SplashViewModel = SplashViewModel()
     
     var body: some View {
