@@ -1,5 +1,5 @@
 //
-//  ProductRow.swift
+//  CartRow.swift
 //  BbTape
 //
 //  Created by 강성찬 on 2023-07-06.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ProductRow: View {
+struct CartRow: View {
     
     @EnvironmentObject var cartManager: CartManager
     
-    var product: Product
+    @State var product: Product
     
     var body: some View {
         HStack(spacing: 10) {
@@ -30,22 +30,27 @@ struct ProductRow: View {
                 Text("$\(product.price)")
             }
             
+            
             Spacer()
             
-            Image(systemName: "trash")
-                .foregroundColor(Color(hue: 1.0, saturation: 0.875, brightness: 0.881))
-                .onTapGesture {
-                    cartManager.removeFromCart(product: product)
-                }
+            Text("X \(product.count)")
+            
+            Button {
+                cartManager.removeFromCart(product: product)
+                product.count = 1
+            } label: {
+                Image(systemName: "trash")
+                    .foregroundColor(Color.red.opacity(0.7))
+            }
         }
         .padding(.horizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-struct ProductRow_Previews: PreviewProvider {
+struct CartRow_Previews: PreviewProvider {
     static var previews: some View {
-        ProductRow(product: productList[1])
+        CartRow(product: Product(title: "", image: "", type: "", size: "", price: 1, count: 1))
             .environmentObject(CartManager())
     }
 }

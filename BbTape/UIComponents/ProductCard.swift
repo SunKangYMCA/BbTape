@@ -11,7 +11,7 @@ struct ProductCard: View {
     
     @EnvironmentObject var cartManager: CartManager
     
-    var product: Product
+    @State var product: Product
     
     var body: some View {
         
@@ -46,7 +46,7 @@ struct ProductCard: View {
                 Image(systemName: "plus")
                     .padding(10)
                     .foregroundColor(.white)
-                    .background(Color(hue: 1.0, saturation: 0.311, brightness: 0.491))
+                    .background(Color.brown)
                     .cornerRadius(50)
                     .padding()
             }
@@ -56,7 +56,7 @@ struct ProductCard: View {
 
 struct ProductCard_Previews: PreviewProvider {
     static var previews: some View {
-        ProductCard(product: productList[3])
+        ProductCard(product: Product(title: "", image: "", type: "", size: "", price: 1, count: 1))
             .environmentObject(CartManager())
     }
 }

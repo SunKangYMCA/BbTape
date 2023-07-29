@@ -10,12 +10,13 @@ import SwiftUI
 struct CartView: View {
     
     @EnvironmentObject var cartManager: CartManager
+    @EnvironmentObject var loginInfo: LoginViewModel
     
     var body: some View {
         ScrollView {
             if cartManager.products.count > 0 {
                 ForEach(cartManager.products) { product in
-                    ProductRow(product: product)
+                    CartRow(product: product)
                 }
                 
                 HStack {
@@ -31,6 +32,11 @@ struct CartView: View {
         }
         .navigationTitle("My Cart")
         .padding(.top)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                    LoginIcon(user: loginInfo.user)
+            }
+        }
     }
 }
 
@@ -38,5 +44,6 @@ struct CartView_Previews: PreviewProvider {
     static var previews: some View {
         CartView()
             .environmentObject(CartManager())
+            .environmentObject(LoginViewModel())
     }
 }

@@ -11,6 +11,7 @@ struct ProductsView: View {
     
     @StateObject var viewModel: ProductsViewModel = ProductsViewModel()
     @StateObject var cartManager: CartManager = CartManager()
+    @EnvironmentObject var loginInfo: LoginViewModel
     
     var body: some View {
         
@@ -19,22 +20,31 @@ struct ProductsView: View {
         }
         .navigationTitle("Products Shop")
         .toolbar {
-            NavigationLink {
-                CartView()
-                    .environmentObject(cartManager)
-            } label: {
-                CartButton(numberOfProducts: cartManager.products.count)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    CartView()
+                        .environmentObject(cartManager)
+                } label: {
+                    CartButton(numberOfProducts: 0)
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                    LoginIcon(user: loginInfo.user)
             }
         }
     }
     
     
+    
     private var VGridView: some View {
         ScrollView {
             LazyVGrid(columns: viewModel.columns) {
-                ForEach(productList, id: \.id) { product in
+                ForEach(viewModel.productList, id: \.id) { product in
                     Button {
                         viewModel.shouldShowProductsDetailView.toggle()
+                        print(viewModel.showingCount.count)
                     } label: {
                         ProductCard(product: product)
                             .environmentObject(cartManager)
@@ -56,5 +66,6 @@ struct ProductsView: View {
 struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsView()
+            .environmentObject(LoginViewModel())
     }
 }

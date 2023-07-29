@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct BbTapeApp: App {
+    @StateObject var cartManager: CartManager = CartManager()
     var body: some Scene {
         WindowGroup {
             SplashView()
+                .environmentObject(cartManager)
         }
     }
 }

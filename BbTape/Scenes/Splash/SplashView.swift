@@ -15,7 +15,7 @@ struct SplashView: View {
         Group {
             ZStack {
                 if viewModel.shouldShowMainTabView {
-                    MainTabView()
+                    LoginView()
                 } else {
                     Rectangle()
                         .ignoresSafeArea()
