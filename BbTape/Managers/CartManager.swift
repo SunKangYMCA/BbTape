@@ -8,10 +8,19 @@
 import Foundation
 
 class CartManager: ObservableObject {
+    // Stored Property
     @Published var products: [Product] = []
-    @Published var totalPrice: Int = 0
     
     static var shared = CartManager()
+    
+    // Computed Property
+    var totalPrice: Int {
+        var totalPrice = 0
+        for product in products {
+            totalPrice += (product.price * product.quantity)
+        }
+        return totalPrice
+    }
     
     var totalQuantity: Int {
         var totalQuantity = 0
@@ -22,20 +31,24 @@ class CartManager: ObservableObject {
     }
     
     func addToCart(product: Product) {
-        
-        if let index = products.firstIndex(where: { $0.id == product.id}) {
+        if let index = products.firstIndex(where: { $0.id == product.id }) {
             products[index].quantity += 1
-            totalPrice += products[index].price
         } else {
             products.append(product)
-            totalPrice += product.price
         }
     }
+    
     func removeFromCart(product: Product) {
-        products = products.filter { $1.id != product.id }
-        totalPrice -= product.price * product.quantity
-        if products.isEmpty {
-            totalPrice = 0
+        products = products.filter { $0.id != product.id }
+    }
+    
+    func updateQuantity(for product: Product, quantity: Int) {
+        if let index = products.firstIndex(of: product) {
+            print("Product id: \(product.id) quantity updated to \(quantity)")
+            products[index].quantity = quantity
+        } else {
+            // Log
+            print("Product id: \(product.id) cannot be found")
         }
     }
 }

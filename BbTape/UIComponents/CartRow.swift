@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CartRow: View {
     
-    @EnvironmentObject var cartManager: CartManager
-    
     @State var product: Product
+    var onTapRemove: () -> ()
+    var onTapStepper: (Int) -> ()
     
     var body: some View {
         HStack(spacing: 10) {
@@ -30,15 +30,17 @@ struct CartRow: View {
                 Text("$\(product.price)")
             }
             
-            
             Spacer()
             
-            Stepper("", value: $product.quantity, in: 1...100, step: 1)
+            Stepper("", value: $product.quantity, in: 0...100, step: 1)
+                .onChange(of: product.quantity) { newValue in
+                    onTapStepper(newValue)
+                }
             
             Text("X \(product.quantity)")
             
             Button {
-                cartManager.removeFromCart(product: product)
+                onTapRemove()
             } label: {
                 Image(systemName: "trash")
                     .foregroundColor(Color.red.opacity(0.7))
@@ -51,7 +53,6 @@ struct CartRow: View {
 
 struct CartRow_Previews: PreviewProvider {
     static var previews: some View {
-        CartRow(product: Product(title: "", image: "", type: "", size: "", price: 1, quantity: 1))
-            .environmentObject(CartManager())
+        CartRow(product: Product(title: "", image: "", type: "", size: "", price: 1, quantity: 1), onTapRemove: {}, onTapStepper: { _ in })
     }
 }

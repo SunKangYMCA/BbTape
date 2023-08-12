@@ -16,7 +16,13 @@ struct CartView: View {
         ScrollView {
             if cartManager.products.count > 0 {
                 ForEach(cartManager.products) { product in
-                    CartRow(product: product)
+                    CartRow(
+                        product: product,
+                        onTapRemove: {
+                            cartManager.removeFromCart(product: product)
+                        }, onTapStepper: { newQuantity in
+                            cartManager.updateQuantity(for: product, quantity: newQuantity)
+                        })
                 }
                 
                 HStack {
