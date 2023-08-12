@@ -25,13 +25,13 @@ struct ProductsView: View {
                     CartView()
                         .environmentObject(cartManager)
                 } label: {
-                    CartButton(numberOfProducts: 0)
+                    CartButton(numberOfProducts: cartManager.totalQuantity)
                 }
             }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                    LoginIcon(user: loginInfo.user)
+                LoggedUserProfile(user: loginInfo.user)
             }
         }
     }
@@ -44,7 +44,6 @@ struct ProductsView: View {
                 ForEach(viewModel.productList, id: \.id) { product in
                     Button {
                         viewModel.shouldShowProductsDetailView.toggle()
-                        print(viewModel.showingCount.count)
                     } label: {
                         ProductCard(product: product)
                             .environmentObject(cartManager)

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContactsView: View {
     
+    @EnvironmentObject var loginInfo: LoginViewModel
+    
     var contactsList: Contact = Contact(phone: "070-4711-7900", email: "info@bbtape.com", address: "318, Jinwi-ro, Jinwi-myeon, Pyeongtaek-si, Gyeonggi-do, Republic of Korea", website: "https://bbtape.com")
     
     var body: some View {
@@ -22,11 +24,16 @@ struct ContactsView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)
                 List {
-                    ListRow(infoImage: "phone", infoUnit: contactsList.phone)
-                    ListRow(infoImage: "e.circle", infoUnit: contactsList.email)
-                    ListRow(infoImage: "house", infoUnit: contactsList.address)
-                    ListRow(infoImage: "w.circle", infoUnit: contactsList.website)
+                    ContactListRow(infoImage: "phone", infoUnit: contactsList.phone)
+                    ContactListRow(infoImage: "e.circle", infoUnit: contactsList.email)
+                    ContactListRow(infoImage: "house", infoUnit: contactsList.address)
+                    ContactListRow(infoImage: "w.circle", infoUnit: contactsList.website)
                 }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                LoggedUserProfile(user: loginInfo.user)
             }
         }
     }
@@ -35,5 +42,6 @@ struct ContactsView: View {
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
         ContactsView()
+            .environmentObject(LoginViewModel())
     }
 }

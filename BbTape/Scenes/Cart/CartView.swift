@@ -22,7 +22,7 @@ struct CartView: View {
                 HStack {
                     Text("Your cart total is")
                     Spacer()
-                    Text("$\(cartManager.total).00")
+                    Text("$\(cartManager.totalPrice).00")
                         .bold()
                 }
                 .padding()
@@ -34,7 +34,7 @@ struct CartView: View {
         .padding(.top)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                    LoginIcon(user: loginInfo.user)
+                LoggedUserProfile(user: loginInfo.user)
             }
         }
     }

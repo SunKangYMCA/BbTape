@@ -9,30 +9,33 @@ import Foundation
 
 class CartManager: ObservableObject {
     @Published var products: [Product] = []
-    @Published var total: Int = 0
+    @Published var totalPrice: Int = 0
     
+    static var shared = CartManager()
+    
+    var totalQuantity: Int {
+        var totalQuantity = 0
+        for product in products {
+            totalQuantity += product.quantity
+        }
+        return totalQuantity
+    }
     
     func addToCart(product: Product) {
         
-        var addNewProduct = true
-        
-        for (index, item) in products.enumerated() {
-            if item.id == product.id {
-                products[index].count = products[index].count + 1
-                total += product.price
-                addNewProduct = false
-            }
-        }
-        if addNewProduct {
+        if let index = products.firstIndex(where: { $0.id == product.id}) {
+            products[index].quantity += 1
+            totalPrice += products[index].price
+        } else {
             products.append(product)
-            total += product.price
+            totalPrice += product.price
         }
     }
     func removeFromCart(product: Product) {
-        products = products.filter { $0.id != product.id }
-        total -= product.price * product.count
+        products = products.filter { $1.id != product.id }
+        totalPrice -= product.price * product.quantity
         if products.isEmpty {
-            total = 0
+            totalPrice = 0
         }
     }
 }

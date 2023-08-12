@@ -1,5 +1,5 @@
 //
-//  ListRow.swift
+//  ContactListRow.swift
 //  BbTape
 //
 //  Created by 강성찬 on 2023-06-15.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListRow: View {
+struct ContactListRow: View {
     
     private let infoImage: String
     private let infoUnit: String

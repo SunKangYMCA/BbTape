@@ -1,5 +1,5 @@
 //
-//  LoginIcon.swift
+//  LoggedUserProfile.swift
 //  BbTape
 //
 //  Created by 강성찬 on 2023-07-27.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginIcon: View {
+struct LoggedUserProfile: View {
     
     var user: User
     
@@ -17,15 +17,15 @@ struct LoginIcon: View {
                 .frame(width: 40, height: 40)
                 .cornerRadius(50)
             
-            Text(user.loggedUser.prefix(1))
+            Text(user.loggedUser.prefix(2))
                 .foregroundColor(.white)
                 .font(.bbFont(type: .smallBold))
         }
     }
 }
 
-struct LoginIcon_Previews: PreviewProvider {
+struct LoggedUserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        LoginIcon(user: User(loggedUser: "SU"))
+        LoggedUserProfile(user: User(loggedUser: "SU"))
     }
 }

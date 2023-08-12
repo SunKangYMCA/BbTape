@@ -33,11 +33,12 @@ struct CartRow: View {
             
             Spacer()
             
-            Text("X \(product.count)")
+            Stepper("", value: $product.quantity, in: 1...100, step: 1)
+            
+            Text("X \(product.quantity)")
             
             Button {
                 cartManager.removeFromCart(product: product)
-                product.count = 1
             } label: {
                 Image(systemName: "trash")
                     .foregroundColor(Color.red.opacity(0.7))
@@ -50,7 +51,7 @@ struct CartRow: View {
 
 struct CartRow_Previews: PreviewProvider {
     static var previews: some View {
-        CartRow(product: Product(title: "", image: "", type: "", size: "", price: 1, count: 1))
+        CartRow(product: Product(title: "", image: "", type: "", size: "", price: 1, quantity: 1))
             .environmentObject(CartManager())
     }
 }

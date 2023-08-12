@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FAQView: View {
+    
+    @EnvironmentObject var loginInfo: LoginViewModel
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -17,10 +20,16 @@ struct FAQView: View {
                 .font(.bbFont(type: .hugeBold))
                 .foregroundColor(.orange)
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                LoggedUserProfile(user: loginInfo.user)
+            }
+        }
     }
 }
 struct FAQView_Previews: PreviewProvider {
     static var previews: some View {
         FAQView()
+            .environmentObject(LoginViewModel())
     }
 }
