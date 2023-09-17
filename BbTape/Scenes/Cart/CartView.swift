@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CartView: View {
-    // Merge Conflict test
-    // Merge Conflict test
-    // Merge Conflict test
+    
+    // Testing merge conflicts
+    
     @EnvironmentObject var cartManager: CartManager
     @EnvironmentObject var loginInfo: LoginViewModel
     
