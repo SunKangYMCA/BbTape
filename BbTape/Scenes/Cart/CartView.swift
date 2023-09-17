@@ -10,7 +10,7 @@ import SwiftUI
 struct CartView: View {
     
     // Testing merge conflicts
-    
+
     @EnvironmentObject var cartManager: CartManager
     @EnvironmentObject var loginInfo: LoginViewModel
     
